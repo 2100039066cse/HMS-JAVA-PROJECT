@@ -87,7 +87,7 @@ return name;
         txtid = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtname = new javax.swing.JTextField();
+        txtdrname = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtdes = new javax.swing.JTextArea();
         txtbuy = new javax.swing.JTextField();
@@ -194,7 +194,7 @@ return name;
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtdrname, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -212,7 +212,7 @@ return name;
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtdrname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -373,8 +373,11 @@ return name;
      public void autoId()
     {
         try {
-             Class.forName("com.mysql.jdbc.Driver");
-                          con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","");
+             String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);
             Statement s = con1.createStatement();
             ResultSet rs = s.executeQuery("SELECT MAX(id) FROM drug");
             rs.next();
@@ -405,11 +408,11 @@ return name;
     private void table_update() {
         int CC;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-                  con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","");
-             //pst = con1.prepareStatement("select c.id,c.dname,p.name,c.roomno,c.date from channel c,patient p where c.pname = p.id and p.status = 'Active' ");       
-                  
-                  
+            String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);      
             pst = con1.prepareStatement("SELECT * FROM drug  ");
              ResultSet Rs = pst.executeQuery();  
             ResultSetMetaData RSMD = Rs.getMetaData();
@@ -439,12 +442,15 @@ return name;
         // TODO add your handling code here:
          String drno = txtid.getText();       
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-                   con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","");
-            pst = con1.prepareStatement("delete from channel where id =?");
+            String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);
+            pst = con1.prepareStatement("delete from drug where id =?");
             pst.setString(1, drno);
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Doctor Deleteeee");  
+            JOptionPane.showMessageDialog(null,"item Deleteeee");  
           
 
             table_update();
@@ -461,7 +467,7 @@ return name;
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
          String itemid = txtid.getText();  
-         String name = txtname.getText();  
+         String name = txtdrname.getText();  
          String des = txtdes.getText();  
          String sell = txtsell.getText();  
          String buy = txtbuy.getText();  
@@ -471,8 +477,11 @@ return name;
          
                
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","");
+            String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);
             pst = con1.prepareStatement("insert into drug(id,item,description,sellprice,buyprice,qty)values(?,?,?,?,?,?)");
          
             pst.setString(1, itemid);
@@ -487,9 +496,14 @@ return name;
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null,"drug Createdddddddddd");
             table_update();
-            autoId();
-           
-           
+            autoId();  
+             txtdrname.getText();  
+         txtdes.setText("");  
+         txtsell.setText("");  
+         txtbuy.setText("");  
+         txtqty.setText("");
+          txtdrname.requestFocus();
+          table_update();
             
             
         } catch (ClassNotFoundException ex) {
@@ -507,43 +521,51 @@ return name;
          
         
         
-           String drno = txtid.getText();        
-         String drname = txtdrname.getText();
-         String drspl = txtspl.getText(); 
-          String drqu = txtroom.getText(); 
-          String fee = txtfee.getText(); 
-           String email = txtemail.getText(); 
-           String room = txtroom.getValue().toString(); 
-
+          String itemid = txtid.getText();  
+         String name = txtdrname.getText();  
+         String des = txtdes.getText();  
+         String sell = txtsell.getText();  
+         String buy = txtbuy.getText();  
+         String qty = txtqty.getText();  
+         
+         
+         
+               
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-             con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","");
-            pst = con1.prepareStatement("update doctor set name = ?, specialization = ?,qualification = ? , fee = ?, email =? , room =? where id = ?");
-          
-            pst.setString(1, drname);
-            pst.setString(2, drspl);
-            pst.setString(3, drqu);
-            pst.setString(4, fee);
-             pst.setString(5, email);
-            pst.setString(6, room);
-             pst.setString(7, drno);
+            String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);
+            pst = con1.prepareStatement("update drug set item=?,description=?,sellprice=?,buyprice=?,qty=? where id= ?");
+         
+            
+            pst.setString(1, name);
+            pst.setString(2, des);
+            pst.setString(3, sell);
+            pst.setString(4, buy);
+             pst.setString(5, qty);
+            pst.setString(6, itemid);
             
             
-              
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Doctor Updated");
+            JOptionPane.showMessageDialog(null,"item Updated");
             table_update();
-          autoId();
-          txtdrname.setText("");
-          txtspl.setText("");
-         txtroom.setText("");
-        jButton5.setEnabled(true);
-  
+            autoId();  
+             txtdrname.getText();  
+         txtdes.setText("");  
+         txtsell.setText("");  
+         txtbuy.setText("");  
+         txtqty.setText("");
+          txtdrname.requestFocus();
+          table_update();
+            
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(patient1.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(patient1.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
         
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -552,9 +574,11 @@ return name;
           DefaultTableModel d1 = (DefaultTableModel)jTable1.getModel();
          int selectIndex = jTable1.getSelectedRow(); 
          txtid.setText(d1.getValueAt(selectIndex, 0).toString());
-         txtdoctor.setSelectedItem(d1.getValueAt(selectIndex, 1).toString());
-         txtpatient.setSelectedItem(d1.getValueAt(selectIndex, 2).toString());
-         txtroom.setText(d1.getValueAt(selectIndex, 3).toString());
+         txtdrname.setText(d1.getValueAt(selectIndex, 1).toString());
+         txtdes.setText(d1.getValueAt(selectIndex, 2).toString());
+         txtsell.setText(d1.getValueAt(selectIndex, 3).toString());
+        txtbuy.setText(d1.getValueAt(selectIndex, 3).toString());
+        txtqty.setText(d1.getValueAt(selectIndex, 3).toString());
         
         jButton5.setEnabled(false);
         
@@ -638,8 +662,8 @@ return name;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtbuy;
     private javax.swing.JTextArea txtdes;
+    private javax.swing.JTextField txtdrname;
     private javax.swing.JLabel txtid;
-    private javax.swing.JTextField txtname;
     private javax.swing.JTextField txtqty;
     private javax.swing.JTextField txtsell;
     // End of variables declaration//GEN-END:variables

@@ -227,14 +227,12 @@ public class viewchannel extends javax.swing.JFrame {
         int CC;
         try {
             
-            
-            
-            Class.forName("com.mysql.jdbc.Driver");
-                  con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","");
-             //pst = con1.prepareStatement("select c.id,c.dname,p.name,c.roomno,c.date from channel c,patient p where c.pname = p.id and p.status = 'Active' ");       
-               
-                 
-            pst = con1.prepareStatement("SELECT channel.id,doctor.name,channel.pname,channel.roomno,channel.date from doctor INNER JOIN channel on doctor.id = channel.d_id where doctor.log_id = ? ");
+            String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);     
+            pst = con1.prepareStatement("SELECT channel.id,doctor.name,channel.pname,channel.roomno,channel.date from doctor INNER JOIN channel on doctor.log_id = channel.d_id where doctor.log_id =?");
             pst.setInt(1, newid);
             
              ResultSet Rs = pst.executeQuery();  

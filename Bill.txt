@@ -1,0 +1,12 @@
+		 Hotel Bill
+--------------------------------------
+  Patient Name       : Sanjeev
+  Tablet Name       : dr003
+  Total cost for room : 0
+---------------------------------------
+		 TAXES
+  CGST       (12%)    : 0.0
+  SGST       (12%)    : 0.0
+ service Tax (10%)    : 0.0
+---------------------------------------
+Total Cost              : 0.0

@@ -108,6 +108,7 @@ return name;
         jLabel6 = new javax.swing.JLabel();
         txtpatient = new javax.swing.JComboBox();
         txtdoctor = new javax.swing.JComboBox();
+        txtdate = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
@@ -178,17 +179,22 @@ return name;
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(txtchno)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtroom, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                             .addComponent(txtpatient, 0, 218, Short.MAX_VALUE)
                             .addComponent(txtdoctor, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(52, 52, 52))))
+                        .addGap(52, 52, 52))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(txtchno))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(81, 81, 81)
+                                .addComponent(txtdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,8 +215,10 @@ return name;
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtroom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(jLabel6)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(txtdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -333,9 +341,12 @@ return name;
        {
            
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-             con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","");
-             pst = con1.prepareStatement("select * from patient");
+            String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);
+            pst = con1.prepareStatement("select * from patient");
               rs = pst.executeQuery();
              txtpatient.removeAllItems();
              
@@ -358,8 +369,11 @@ return name;
        {
            
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-             con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","");
+            String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);
              pst = con1.prepareStatement("select * from doctor");
               rs = pst.executeQuery();
              txtdoctor.removeAllItems();
@@ -391,9 +405,11 @@ return name;
      public void autoId()
     {
         try {
-             Class.forName("com.mysql.jdbc.Driver");
-                          con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","Eswar.62004");
-            Statement s = con1.createStatement();
+            String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);Statement s = con1.createStatement();
             ResultSet rs = s.executeQuery("SELECT MAX(id) FROM channel");
             rs.next();
             rs.getString("MAX(id)");
@@ -423,9 +439,11 @@ return name;
     private void table_update() {
         int CC;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-                  con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","");
-             //pst = con1.prepareStatement("select c.id,c.dname,p.name,c.roomno,c.date from channel c,patient p where c.pname = p.id and p.status = 'Active' ");       
+            String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);//pst = con1.prepareStatement("select c.id,c.dname,p.name,c.roomno,c.date from channel c,patient p where c.pname = p.id and p.status = 'Active' ");       
                   
                   
             pst = con1.prepareStatement("SELECT * FROM channel where status = 'Active' ");
@@ -457,8 +475,11 @@ return name;
         // TODO add your handling code here:
          String drno = txtchno.getText();       
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-                   con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","");
+            String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);
             pst = con1.prepareStatement("delete from channel where id =?");
             pst.setString(1, drno);
             pst.executeUpdate();
@@ -489,8 +510,11 @@ return name;
          String date = Date_Format.format(txtdate.getDate());
                
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","");
+            String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);
             pst = con1.prepareStatement("insert into channel(id,d_id,pname,roomno,date,status)values(?,?,?,?,?,'Active')");
          
             pst.setString(1, drno);
@@ -630,6 +654,7 @@ return name;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel txtchno;
+    private com.toedter.calendar.JDateChooser txtdate;
     private javax.swing.JComboBox txtdoctor;
     private javax.swing.JComboBox txtpatient;
     private javax.swing.JTextField txtroom;

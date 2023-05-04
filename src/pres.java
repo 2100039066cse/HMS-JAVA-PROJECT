@@ -1,5 +1,7 @@
 
 import com.sun.glass.events.KeyEvent;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -337,8 +339,11 @@ public class pres extends javax.swing.JFrame {
         int lastinsetid = 0;
         
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-             con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","");
+            String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);     
             
              String query = "insert into sales(date,subtotal,pay,balance)values(?,?,?,?)";          
              pst = con1.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);        
@@ -537,9 +542,12 @@ public class pres extends javax.swing.JFrame {
             // TODO add your handling code here:
              String name = txtcode.getText();
             
-            Class.forName("com.mysql.jdbc.Driver");
-             con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","");
-                    pst = con1.prepareStatement("select * from drug where id=?");
+             String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);     
+             pst = con1.prepareStatement("select * from drug where id=?");
              pst.setString(1, name);
              rs = pst.executeQuery();
              
@@ -555,7 +563,27 @@ public class pres extends javax.swing.JFrame {
                  qty = Integer.parseInt(txtqty.getValue().toString());
                  
                  int tot = sellprice * qty;
-                 
+ try{
+                FileWriter myWriter=new FileWriter("Bill.txt");
+                myWriter.write("\t\t Hotel Bill\n");
+                myWriter.write("--------------------------------------");
+               myWriter.write("\n  Patient Name       : Sanjeev");
+                myWriter.write("\n  Tablet Name       : "+name);
+               
+                myWriter.write("\n  Total cost for room : "+tot);
+                myWriter.write("\n---------------------------------------");
+                myWriter.write("\n\t\t TAXES");
+                myWriter.write("\n  CGST       (12%)    : "+tot*0.12);
+                myWriter.write("\n  SGST       (12%)    : "+tot*0.12);
+                myWriter.write("\n service Tax (10%)    : "+tot*0.1);
+                myWriter.write("\n---------------------------------------");
+                myWriter.write("\nTotal Cost              : "+(tot+tot*0.34));
+                myWriter.close();
+                
+            } catch (IOException e)
+            {
+                System.out.println("An error occurred");
+            }
                  if(qty >= currentqty)
                  {
                      JOptionPane.showMessageDialog(this, "Available Product" + " = " +currentqty);

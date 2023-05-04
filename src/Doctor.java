@@ -369,8 +369,11 @@ public class Doctor extends javax.swing.JFrame {
      public void autoId()
     {
         try {
-             Class.forName("com.mysql.jdbc.Driver");
-                          con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydatabase","root","");
+             String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);
             Statement s = con1.createStatement();
             ResultSet rs = s.executeQuery("SELECT MAX(id) FROM Doctor ");
             rs.next();
@@ -405,9 +408,11 @@ public class Doctor extends javax.swing.JFrame {
            
               
             
-            Class.forName("com.mysql.jdbc.Driver");
-            con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","");
-
+            String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);
             pst = con1.prepareStatement("SELECT * FROM Doctor where log_id = ? ");
             pst.setInt(1, idd);   
 
@@ -434,9 +439,11 @@ public class Doctor extends javax.swing.JFrame {
             }
             else 
             {
-           Class.forName("com.mysql.jdbc.Driver");
-           con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","");
-           pst = con1.prepareStatement("SELECT * FROM Doctor");
+          String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);pst = con1.prepareStatement("SELECT * FROM Doctor");
              ResultSet Rs = pst.executeQuery();  
             ResultSetMetaData RSMD = Rs.getMetaData();
             CC = RSMD.getColumnCount();
@@ -476,9 +483,11 @@ public class Doctor extends javax.swing.JFrame {
         // TODO add your handling code here:
          String drno = txtdrno.getText();       
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-                   con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","");
-            pst = con1.prepareStatement("delete from doctor where id =?");
+            String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);pst = con1.prepareStatement("delete from doctor where id =?");
             pst.setString(1, drno);
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null,"Doctor Deleteeee");  
@@ -518,9 +527,11 @@ public class Doctor extends javax.swing.JFrame {
          
          
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","Eswar.62004");
-            pst = con1.prepareStatement("insert into doctor(id,log_id,name,specialization,qualification,fee,email,room)values(?,?,?,?,?,?,?,?)");
+            String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);pst = con1.prepareStatement("insert into doctor(id,log_id,name,specialization,qualification,fee,email,room)values(?,?,?,?,?,?,?,?)");
             pst.setString(1, drno);
              pst.setInt(2, logid);
             pst.setString(3, drname);
@@ -566,9 +577,11 @@ public class Doctor extends javax.swing.JFrame {
            String room = txtroom.getValue().toString(); 
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-             con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","");
-            pst = con1.prepareStatement("update doctor set name = ?, specialization = ?,qualification = ? , fee = ?, email =? , room =? where id = ?");
+           String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);pst = con1.prepareStatement("update doctor set name = ?, specialization = ?,qualification = ? , fee = ?, email =? , room =? where id = ?");
           
             pst.setString(1, drname);
             pst.setString(2, drspl);

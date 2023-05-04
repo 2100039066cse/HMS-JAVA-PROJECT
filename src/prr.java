@@ -146,8 +146,11 @@ public class prr extends javax.swing.JFrame {
     private void table_update() {
         int CC;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-                  con1 = DriverManager.getConnection("jdbc:mysql://localhost/loyal","root","");
+            String url="jdbc:mysql://localhost:3306/lakshmihospital";
+            String uname="root";
+            String pdb="Eswar.62004";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con1 =DriverManager.getConnection(url,uname,pdb);
             pst = con1.prepareStatement("SELECT * FROM pres");
              ResultSet Rs = pst.executeQuery();  
             ResultSetMetaData RSMD = Rs.getMetaData();
@@ -158,7 +161,7 @@ public class prr extends javax.swing.JFrame {
             while (Rs.next()) {
                 Vector v2 = new Vector();
                 for (int ii = 1; ii <= CC; ii++) {
-                    v2.add(Rs.getString("id"));
+                    v2.add(Rs.getString("pid"));
                     v2.add(Rs.getString("chid"));
                     v2.add(Rs.getString("detype"));
                     v2.add(Rs.getString("description"));

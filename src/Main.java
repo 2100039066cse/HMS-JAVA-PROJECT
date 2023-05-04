@@ -295,8 +295,6 @@ public class Main extends javax.swing.JFrame {
         });
         getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, 144, 48));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Eswar adithya\\Desktop\\Screenshot 2023-03-30 120230.png")); // NOI18N
-        jLabel6.setText("jLabel6");
         jLabel6.setRequestFocusEnabled(false);
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 489));
 
